@@ -1,8 +1,8 @@
 <script setup>
-import { computed } from 'vue'; //TODO 動態路由匹配
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
-const userId = computed(() => route.params.username);
+const userId = computed(() => route.params);
 </script>
 <template>
   <div>

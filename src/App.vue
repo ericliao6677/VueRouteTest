@@ -1,9 +1,9 @@
 <script setup>
-import { computed } from 'vue'
-import { RouterLink, RouterView, useRoute } from 'vue-router'
-
+import { computed } from 'vue';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
+// TODO:useRoute()
 //筆記: 使用 useRoute 函數來訪問當前路由的相關信息，包括 fullPath 屬性
-const route = useRoute(); // TODO:useRoute()
+const route = useRoute();
 //利用computed監聽route變化
 const fullpath = computed(() => route.fullPath);
 </script>
@@ -13,8 +13,15 @@ const fullpath = computed(() => route.fullPath);
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">route test</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -30,7 +37,7 @@ const fullpath = computed(() => route.fullPath);
       </div>
     </nav>
     <h5>current Route: {{ fullpath }}</h5>
-    <hr>
+    <hr />
     <RouterView />
   </div>
 </template>
