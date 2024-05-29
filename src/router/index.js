@@ -1,12 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import User from '../views/User2View.vue';
-import UserProfile from '../views/UserProfileView.vue';
-import UserPost from '../views/UserPostView.vue';
-import UserHome from '../views/UserHomeView.vue';
-
-import Sidebar from '../views/SidebarView.vue';
-import Sidebar2 from '../views/SidebarView2.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,16 +6,13 @@ const router = createRouter({
     {
       path: '/',
       components: {
-        default: HomeView,
-        Sidebar: Sidebar
+        default: () => import('../views/HomeView.vue'),
+        Nav: () => import('../views/NavView.vue')
       }
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     //TODO 動態路由匹配
@@ -62,26 +51,24 @@ const router = createRouter({
       // 當 strict 為 true 時，不匹配 /users/1/
       // 當 sensitive 為 true 時，不匹配 /Users/1
       path: '/users/:id(\\d+)',
-      name: 'user-parent', //TODO 不顯示巢狀路由可命名父路由，但重載後將始終顯示嵌套的子路由
-      components: {
-        default: User,
-        Sidebar: Sidebar2
-      },
+      //TODO 不顯示巢狀路由可命名父路由，但重載後將始終顯示嵌套的子路由
+      name: 'user-parent',
+      component: () => import('../views/User2View.vue'),
       children: [
         {
           //TODO 嵌套的命名路由
           //筆記: 因為子路由的路徑是空字串，所以任何匹配到 /user/:id 的路徑都會載入這個子路由。
           path: '',
           name: 'userDefault',
-          component: UserHome
+          component: () => import('../views/UserHomeView.vue')
         },
         {
           path: 'profile',
-          component: UserProfile
+          component: () => import('../views/UserProfileView.vue')
         },
         {
           path: 'post',
-          component: UserPost
+          component: () => import('../views/UserPostView.vue')
         }
       ]
     },
@@ -129,6 +116,35 @@ const router = createRouter({
         // return 重定向的字符串路径/路径对象
         return { path: '/search', query: { q: to.params.searchText } };
       }
+    },
+    //TODO 實作layout
+    {
+      path: '/layout',
+      component: () => import('../views/LayoutTest/LayoutView.vue'),
+      children: [
+        {
+          path: '',
+          components: {
+            default: () => import('../views/LayoutTest/LayoutDefaultView.vue'),
+            LayoutNav: () => import('../views/LayoutTest/NavView.vue'),
+            Sidebar: () => import('../views/LayoutTest/SidebarView.vue')
+          },
+          children: [
+            {
+              path: '',
+              component: () => import('../views/LayoutTest/ContentPages/UserInfoView.vue')
+            },
+            {
+              path: 'order',
+              component: () => import('../views/LayoutTest/ContentPages/OrderView.vue')
+            },
+            {
+              path: 'product',
+              component: () => import('../views/LayoutTest/ContentPages/ProductView.vue')
+            }
+          ]
+        }
+      ]
     }
   ]
 });
