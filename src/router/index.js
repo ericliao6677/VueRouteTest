@@ -92,7 +92,6 @@ const router = createRouter({
         {
           path: 'email',
           name: 'settingEmail',
-          //component: () => import('../views/settings/EmailView.vue')
           components: {
             default: () => import('../views/settings/EmailView.vue'),
             helper: () => import('../views/RegisterView.vue')
@@ -119,10 +118,12 @@ const router = createRouter({
     },
     //TODO 實作layout
     {
+      // 詳細說明: VueRouterNote.md
       path: '/layout',
       component: () => import('../views/LayoutTest/LayoutView.vue'),
       children: [
         {
+          //因為path為空
           path: '',
           components: {
             default: () => import('../views/LayoutTest/LayoutDefaultView.vue'),

@@ -1,3 +1,5 @@
 <script setup></script>
-<template><router-view></router-view></template>
+<template>
+  <router-view class="p-3 bg-info min-vh-100"></router-view>
+</template>
 <style></style>
