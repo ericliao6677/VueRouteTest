@@ -1,7 +1,4 @@
-<script setup>
-import { computed } from 'vue';
-import { RouterView, useRoute } from 'vue-router';
-</script>
+<script setup></script>
 
 <template>
   <router-view name="Nav"></router-view>

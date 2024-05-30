@@ -146,6 +146,11 @@ const router = createRouter({
           ]
         }
       ]
+    },
+    //TODO pinia
+    {
+      path: '/pinia',
+      component: () => import('../views/PiniaTest/Page1View.vue')
     }
   ]
 });
